@@ -6,4 +6,6 @@ public class CGun : MonoBehaviour
     public Camera cam;
     public float launchForceMagnitude;
     public Transform player;
+
+    public float pitchOffset = -75.0f;
 }

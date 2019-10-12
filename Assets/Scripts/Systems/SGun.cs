@@ -16,13 +16,12 @@ public class SGun : ComponentSystem
 
         Entities.ForEach((Entity entity, Transform transform, CGun gun) => {
             if (Input.GetButtonDown("Fire1")) {
-                Vector3 worldCenter = gun.cam.transform.position;
-
                 Vector3 launchDir = gun.transform.forward;
-                launchDir = Quaternion.AngleAxis(-75.0f, gun.transform.right) * launchDir;
+                if (Vector3.Angle(Vector3.forward, launchDir) < 20.0f)
+                {
+                    launchDir = Quaternion.AngleAxis(gun.pitchOffset, gun.transform.right) * launchDir;
+                }
 
-                Debug.DrawRay(gun.socket.position, launchDir, Color.red, 3.0f);
-                
                 GameObject bullet = GameObject.Instantiate(gun.bullet, gun.socket.position, Quaternion.identity);
                 bullet.GetComponent<CInitialForce>().force = launchDir * gun.launchForceMagnitude;
             }
