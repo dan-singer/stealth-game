@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Entities;   
 
-public struct CPlayerMovement : IComponentData
+public class CPlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
     public float rotationSpeed;
