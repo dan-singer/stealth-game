@@ -37,7 +37,6 @@ public class Testing : MonoBehaviour
             entityManager.SetComponentData(entity, new MoveSpeedComponent { moveSpeed = Random.Range(1.0f, 2.0f) });
             entityManager.SetComponentData(entity, new Translation { Value = new float3(Random.Range(-8f, 8f), Random.Range(-5f, 5f), 0.0f) });
 
-
             entityManager.SetSharedComponentData(entity, new RenderMesh { mesh = mesh, material = material });
         }
 

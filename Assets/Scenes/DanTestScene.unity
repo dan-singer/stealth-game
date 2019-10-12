@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 6626783}
   - component: {fileID: 6626782}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,11 +146,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6626781}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4b1475da4b75da4185c6cac18df0ba7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1555261e848a8a640955eb6f953014e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 2100000, guid: 0a7805c64c43c254f962da29486d1ff4, type: 2}
+  moveSpeed: 10
+  rotationSpeed: 10
+  mesh: {fileID: 0}
 --- !u!4 &6626783
 Transform:
   m_ObjectHideFlags: 0
