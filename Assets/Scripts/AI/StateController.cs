@@ -18,23 +18,38 @@ public class StateController : MonoBehaviour, IStateController
     public float maxSight = 5.0f;
     public float wanderRadius = 10.0f;
 
-    public int nextWayPoint { get; set; }
-    public Transform chaseTarget { get; set; }
-    public Vector3 lastKnownTargetLocation { get; set; }
-    public bool hasWanderTarget { get; set; }
-    public float stateEnterTime { get; set; }
+    public Transform target;
+    
     /// <summary>
     /// How long it takes for the agent to lose track of where the player is
     /// </summary>
     public float targetSightMemoryDuration = .75f;
 
+
+    public int nextWayPoint { get; set; }
+    public Transform chaseTarget { get; set; }
+    public Vector3 lastKnownTargetLocation { get; set; }
+    public bool hasWanderTarget { get; set; }
+    public float stateEnterTime { get; set; }
+
+
     public float lastTargetSightTime { get; set; }
+
+    public static System.Action SawTarget;
+    public static System.Action LostTarget;
+    public static System.Action BeganSearching;
+    public static System.Action FinishedSearching;
+
+
 
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         stateEnterTime = Time.time;
         lastTargetSightTime = -targetSightMemoryDuration; // Makes sure look doesn't fire incorrectly
+        if (!target) {
+            target = GameObject.FindWithTag("Player").transform;
+        }
     }
 
     private void Update()

@@ -13,6 +13,11 @@ public class WanderState : State
     public override void Exit(IStateController controller)
     {
         base.Exit(controller);
+        // Consider stopping wandering as the end of the searching cycle
+        if (StateController.FinishedSearching != null)
+        {
+            StateController.FinishedSearching();
+        }
     }
 
 }

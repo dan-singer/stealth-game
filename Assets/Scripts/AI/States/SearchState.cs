@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "PluggableAI/States/Chase")]
-public class ChaseState : State
+[CreateAssetMenu(menuName = "PluggableAI/States/Search")]
+public class SearchState : State
 {
     /// <summary>
     /// NavMesh speed mutliplier when this state is entered
@@ -11,10 +11,9 @@ public class ChaseState : State
     {
         base.Enter(controller);
         StateController castedController = (StateController)controller;
-        castedController.navMeshAgent.speed *= speedMultiplier;
-        if (StateController.SawTarget != null)
+        if (StateController.BeganSearching != null)
         {
-            StateController.SawTarget();
+            StateController.BeganSearching();
         }
     }
 
@@ -22,10 +21,5 @@ public class ChaseState : State
     {
         base.Exit(controller);
         StateController castedController = (StateController)controller;
-        castedController.navMeshAgent.speed /= speedMultiplier;
-        if (StateController.LostTarget != null)
-        {
-            StateController.LostTarget();
-        }
     }
 }

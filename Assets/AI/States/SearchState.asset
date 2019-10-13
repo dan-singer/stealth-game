@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf15c7741513c42438095e2b72645ed2, type: 3}
+  m_Script: {fileID: 11500000, guid: 201de31e8276735489a8ffb1564758f7, type: 3}
   m_Name: SearchState
   m_EditorClassIdentifier: 
   actions:
@@ -19,3 +19,4 @@ MonoBehaviour:
     trueState: {fileID: 11400000, guid: c39db7f4a05c1b5418e0bbff1a40a09e, type: 2}
     falseState: {fileID: 11400000}
   sceneGizmoColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  speedMultiplier: 1.5
