@@ -17,6 +17,20 @@ public class SPlayerMovement : ComponentSystem
         Entities.ForEach((Entity entity, Transform transform, CharacterController controller, CPlayerMovement playerMovement) => {
             // Translation
             Vector3 localVel = new Vector3(horz, 0, vert);
+            if (localVel.sqrMagnitude > 0) {
+                playerMovement.bobTime += Time.deltaTime * playerMovement.bobSpeed;
+            } 
+            else {
+                playerMovement.bobTime %= Mathf.PI * 2;
+                float resumeTarget;
+                if (playerMovement.bobTime <= Mathf.PI) {
+                    resumeTarget = Mathf.PI;
+                } 
+                else {
+                    resumeTarget = Mathf.PI * 2;
+                }
+                playerMovement.bobTime = Mathf.Lerp(playerMovement.bobTime, resumeTarget, 0.1f);
+            }
             Vector3 worldVel = Quaternion.Euler(0, transform.eulerAngles.y, 0) * localVel;
             worldVel *= playerMovement.moveSpeed;
 
@@ -61,7 +75,10 @@ public class SPlayerMovement : ComponentSystem
             playerMovement.pitch = Mathf.Clamp(playerMovement.pitch, playerMovement.minPitch, playerMovement.maxPitch);
             playerMovement.yaw += yaw * playerMovement.rotationSpeed * Time.deltaTime;
 
-            transform.rotation = Quaternion.Euler(playerMovement.pitch, playerMovement.yaw, 0);
+            // Head Bob
+            float pitchOffset = Mathf.Sin(playerMovement.bobTime) * playerMovement.bobAmplitude;
+
+            transform.rotation = Quaternion.Euler(playerMovement.pitch + pitchOffset, playerMovement.yaw, 0);
         });
     }
 }
