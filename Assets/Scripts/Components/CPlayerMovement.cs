@@ -16,10 +16,15 @@ public class CPlayerMovement : MonoBehaviour
 
     public float bobSpeed = 1.5f;
     public float bobAmplitude = 3.0f;
+    
+    public AudioClip[] footstepSounds;
     [HideInInspector] public Vector3 acceleration;
     [HideInInspector] public float pitch = 0;
     [HideInInspector] public float yaw = 0;
     [HideInInspector] public bool isCrouched = false;
     [HideInInspector] public float bobTime = 0.0f;
+    [HideInInspector] public float footstepTime = 0.0f;
+    [HideInInspector] public int curFootstepIndex = 0;
+
 
 }

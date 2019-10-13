@@ -14,11 +14,23 @@ public class SPlayerMovement : ComponentSystem
     {
         float horz = Input.GetAxis("Horizontal");
         float vert = Input.GetAxis("Vertical");
-        Entities.ForEach((Entity entity, Transform transform, CharacterController controller, CPlayerMovement playerMovement) => {
+        Entities.ForEach((Entity entity, Transform transform, CharacterController controller, CPlayerMovement playerMovement, AudioSource audioSource) => {
             // Translation
             Vector3 localVel = new Vector3(horz, 0, vert);
             if (localVel.sqrMagnitude > 0) {
                 playerMovement.bobTime += Time.deltaTime * playerMovement.bobSpeed;
+
+                // Footsteps
+                if (playerMovement.footstepTime == 0.0f) {
+                    audioSource.PlayOneShot(playerMovement.footstepSounds[playerMovement.curFootstepIndex]);
+                }
+                else if (playerMovement.footstepTime > playerMovement.footstepSounds[playerMovement.curFootstepIndex].length) {
+                    playerMovement.footstepTime = 0.0f;
+                    playerMovement.curFootstepIndex = (playerMovement.curFootstepIndex + 1) % playerMovement.footstepSounds.Length;
+                    audioSource.PlayOneShot(playerMovement.footstepSounds[playerMovement.curFootstepIndex]);
+
+                }
+                playerMovement.footstepTime += Time.deltaTime;
             } 
             else {
                 playerMovement.bobTime %= Mathf.PI * 2;
@@ -30,6 +42,7 @@ public class SPlayerMovement : ComponentSystem
                     resumeTarget = Mathf.PI * 2;
                 }
                 playerMovement.bobTime = Mathf.Lerp(playerMovement.bobTime, resumeTarget, 0.1f);
+                playerMovement.footstepTime = 0.0f;
             }
             Vector3 worldVel = Quaternion.Euler(0, transform.eulerAngles.y, 0) * localVel;
             worldVel *= playerMovement.moveSpeed;
@@ -65,6 +78,7 @@ public class SPlayerMovement : ComponentSystem
 
             worldVel += playerMovement.acceleration * Time.deltaTime;
             controller.Move(worldVel * Time.deltaTime);
+
             
 
             // Rotation
