@@ -8,4 +8,10 @@ public class CPlayerVisibility : MonoBehaviour
     public float targetIntensity = 0.444f;
     [HideInInspector] public bool initialized = false;
     [HideInInspector] public bool isDead = false;
+
+    public System.Action Seen;
+    public System.Action SearchedFor;
+    public System.Action Hidden;
+
+
 }

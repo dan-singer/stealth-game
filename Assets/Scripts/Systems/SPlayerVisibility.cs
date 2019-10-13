@@ -18,15 +18,24 @@ public class SPlayerVisibility : ComponentSystem
             if (!playerVisibility.initialized) {
                 StateController.SawTarget += () => {
                     ++playerVisibility.numEnemiesSeenBy;
+                    if (playerVisibility.numEnemiesSeenBy == 1 && playerVisibility.Seen != null) {
+                        playerVisibility.Seen();
+                    }
                 };
                 StateController.LostTarget += () => {
                     --playerVisibility.numEnemiesSeenBy;
                 };
                 StateController.BeganSearching += () => {
                     ++playerVisibility.numEnemiesSearchingFor;
+                    if (playerVisibility.numEnemiesSeenBy == 0 && playerVisibility.numEnemiesSearchingFor == 1 && playerVisibility.SearchedFor != null) {
+                        playerVisibility.SearchedFor();
+                    }
                 };
                 StateController.FinishedSearching += () => {
                     --playerVisibility.numEnemiesSearchingFor;
+                    if (playerVisibility.numEnemiesSeenBy == 0 && playerVisibility.numEnemiesSearchingFor == 0 && playerVisibility.Hidden != null) {
+                        playerVisibility.Hidden();
+                    }
                 };
                 StateController.HitTarget += () => {
                     playerVisibility.isDead = true;
