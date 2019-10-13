@@ -9,4 +9,8 @@ public class CGun : MonoBehaviour
     public AudioClip fireSound;
 
     public float pitchOffset = -75.0f;
+
+    public int startAmmo = 4;
+    [HideInInspector] public int curAmmo;
+    [HideInInspector] public bool initialized = false;
 }
