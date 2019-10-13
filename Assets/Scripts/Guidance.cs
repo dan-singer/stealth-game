@@ -42,16 +42,12 @@ public class Guidance : MonoBehaviour
             // rotate to point in the direction of the closest objective
             arrow.transform.rotation = Quaternion.LookRotation((closest - arrow.transform.position).normalized, Vector3.up);
 
-            // still need to fix the arrow not being centered
-            arrow.transform.localPosition = Vector3.zero;
         }
         else // guidance is unfocused
         {
             // rotate to point in the general direction of the closest objective
             arrow.transform.rotation = Quaternion.LookRotation(((UnfocusedDirection(FindClosestObjective())) - arrow.transform.position).normalized, Vector3.up);
 
-            // still need to fix the arrow not being centered
-            arrow.transform.localPosition = Vector3.zero;
             // arrow.transform.localPosition = new Vector3(0.5f, 0.5f, -0.8f);
         }
     }
