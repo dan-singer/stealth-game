@@ -5,8 +5,8 @@ using UnityEngine;
 public class Guidance : MonoBehaviour
 {
     // this will get passed in from the card collection script, it will update when a card is collected and push the updated array to here
-    [SerializeField]
-    private GameObject[] piecesArr;
+    // [SerializeField]
+    public List<GameObject> piecesList;
 
     [SerializeField]
     private GameObject compass;
@@ -31,7 +31,7 @@ public class Guidance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        altar = GameObject.Find("Altar");
     }
 
     // Update is called once per frame
@@ -82,29 +82,29 @@ public class Guidance : MonoBehaviour
     // will find the closest piece to the player if there is one still present on the map, if not it will point towards the altar
     Vector3 FindClosestObjective()
     {
-        if(piecesArr.Length >= 2) // there are at least 2 card pieces left to collect, determine which is closer
+        if(piecesList.Count >= 2) // there are at least 2 card pieces left to collect, determine which is closer
         {
             // will always be larger
             float distA = Mathf.Infinity;
 
             // loop through pieces
-            for (int i = 0; i < piecesArr.Length; i++)
+            for (int i = 0; i < piecesList.Count; i++)
             {
                 // check if there is a closer piece still in the world
-                if(Vector3.Distance(piecesArr[i].transform.position, compass.GetComponentInParent<Transform>().position) < distA)
+                if(Vector3.Distance(piecesList[i].transform.position, compass.GetComponentInParent<Transform>().position) < distA)
                 {
-                    distA = Vector3.Distance(piecesArr[i].transform.position, compass.GetComponentInParent<Transform>().GetComponentInParent<Transform>().position);
-                    tempObject = piecesArr[i];
+                    distA = Vector3.Distance(piecesList[i].transform.position, compass.GetComponentInParent<Transform>().GetComponentInParent<Transform>().position);
+                    tempObject = piecesList[i];
                 }
             }
 
             // return the closest gameObject
             return tempObject.transform.position;
         }
-        else if(piecesArr.Length == 1) // there is only 1 card piece remaining
+        else if(piecesList.Count == 1) // there is only 1 card piece remaining
         {
             // return the vector3 of the remaining piece
-            return piecesArr[0].transform.position;
+            return piecesList[0].transform.position;
         }
         else // there are no more card pieces to collect
         {
