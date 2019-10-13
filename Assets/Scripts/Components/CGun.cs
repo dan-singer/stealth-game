@@ -1,4 +1,8 @@
 using UnityEngine;
+
+/// <summary>
+/// Gun Component
+/// </summary>
 public class CGun : MonoBehaviour
 {
     public GameObject bullet;

@@ -7,6 +7,7 @@ using Unity.Mathematics;
 using Unity.Rendering;
 
 /// <summary>
+/// Gun shot visualization system
 /// </summary>
 public class SGunViz : ComponentSystem
 {

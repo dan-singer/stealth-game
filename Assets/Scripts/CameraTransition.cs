@@ -9,12 +9,7 @@ public class CameraTransition : MonoBehaviour
 
     public System.Action<int> Transitioned;
     public System.Action TransitionsComplete;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    
     public void Transition()
     {
         if (index < waypoints.Length - 1)

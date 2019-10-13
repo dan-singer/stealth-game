@@ -1,9 +1,10 @@
 using UnityEngine;
 
+/// <summary>
+/// Generic initial force component
+/// </summary>
 public class CInitialForce : MonoBehaviour 
 {
     public Vector3 force;
-    public bool isLocal = true;
-    [HideInInspector]
-    public bool launched = false;
+    [HideInInspector] public bool launched = false;
 }

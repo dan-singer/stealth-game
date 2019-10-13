@@ -7,6 +7,7 @@ using Unity.Mathematics;
 using Unity.Rendering;
 
 /// <summary>
+/// Gun System
 /// </summary>
 public class SGun : ComponentSystem
 {
