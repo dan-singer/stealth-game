@@ -17,62 +17,73 @@ public class Guidance : MonoBehaviour
     [SerializeField]
     private GameObject arrow;
 
-    private float xValFocus, xValUnfocus;
+    [SerializeField]
+    private GameObject focusedPos;
+
+    [SerializeField]
+    private GameObject unfocusedPos;
+
+    private bool startCheck = false;
+    private float startTime;
+    private float speed = 1.0f;
+    private float journeyLength;
+
     // Start is called before the first frame update
     void Start()
     {
-        // set piecesArr to the array of pices that are in the world
-        // when one is picked up call back to this script and update the array
-        // piecesArr = gameObject.transform.Find("GameManager").
-
-        // find the refeence to the arm holding the compass
-
-        // xValUnfocus = compass.transform.position.x;
-        // xValFocus = compass.transform.forward.x + 1;
-        // arrow = gameObject.transform.Find("Arrow").gameObject;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        // focus the guidance
-        if (Input.GetKey(KeyCode.Q)) { 
-            Vector3 closest = FindClosestObjective();
+        Vector3 closest = FindClosestObjective();
 
-            // rotate to point in the direction of the closest objective
-            arrow.transform.rotation = Quaternion.LookRotation((closest - arrow.transform.position).normalized, Vector3.up);
+        // rotate to point in the direction of the closest objective
+        arrow.transform.rotation = Quaternion.LookRotation((closest - arrow.transform.position).normalized, Vector3.up);
+        
+        // lerp to a more focused position
+        if (Input.GetKey(KeyCode.Q)) {
+            // get the start time for lerping
+            if (startCheck == false)
+            {
+                startTime = Time.time;
+                startCheck = true;
+            }
 
+            journeyLength = Vector3.Distance(unfocusedPos.transform.localPosition, focusedPos.transform.localPosition);
+
+            float distCovered = (Time.time - startTime) * speed;
+
+            float fractionOfJourney = distCovered / journeyLength;
+
+            compass.transform.localPosition = Vector3.Lerp(unfocusedPos.transform.localPosition, focusedPos.transform.localPosition, fractionOfJourney);
         }
-        else // guidance is unfocused
+        else
         {
-            // rotate to point in the general direction of the closest objective
-            arrow.transform.rotation = Quaternion.LookRotation(((UnfocusedDirection(FindClosestObjective())) - arrow.transform.position).normalized, Vector3.up);
+            // get the start time for lerping back
+            if(startCheck == true)
+            {
+                startTime = Time.time;
+                startCheck = false;
+            }
 
-            // arrow.transform.localPosition = new Vector3(0.5f, 0.5f, -0.8f);
+            journeyLength = Vector3.Distance(focusedPos.transform.localPosition, unfocusedPos.transform.localPosition);
+
+            float distCovered = (Time.time - startTime) * speed;
+
+            float fractionOfJourney = distCovered / journeyLength;
+
+            compass.transform.localPosition = Vector3.Lerp(focusedPos.transform.localPosition, unfocusedPos.transform.localPosition, fractionOfJourney);
         }
     }
 
-    Vector3 UnfocusedDirection(Vector3 objective)
-    {
-        // get a random number to add or subtract from the actual normalized direction
-        float rand = Random.Range(-45.0f, 46.0f);
-
-        Debug.Log("Rand: " + rand);
-
-        Vector3 unfocDir = new Vector3(objective.x + rand, objective.y + rand, objective.z + rand); // should make the arrow jump back and forth a bit
-
-        return unfocDir;
-    }
 
     // will find the closest piece to the player if there is one still present on the map, if not it will point towards the altar
     Vector3 FindClosestObjective()
     {
         if(piecesArr.Length >= 2) // there are at least 2 card pieces left to collect, determine which is closer
         {
-            // set the first distance to check
-            // float distA = Vector3.Distance(piecesArr[0].transform.position, compass.GetComponentInParent<Transform>().position);
-            // tempObject = piecesArr[0];
-
             // will always be larger
             float distA = Mathf.Infinity;
 
@@ -84,11 +95,9 @@ public class Guidance : MonoBehaviour
                 {
                     distA = Vector3.Distance(piecesArr[i].transform.position, compass.GetComponentInParent<Transform>().GetComponentInParent<Transform>().position);
                     tempObject = piecesArr[i];
-                    Debug.Log("Dist:" + distA);
                 }
             }
 
-            // Debug.Log(tempObject.name);
             // return the closest gameObject
             return tempObject.transform.position;
         }
