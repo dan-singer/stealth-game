@@ -207,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 256277222}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3.5543, y: 1, z: 3.6646}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -382,6 +382,7 @@ GameObject:
   - component: {fileID: 816369671}
   - component: {fileID: 816369670}
   - component: {fileID: 816369672}
+  - component: {fileID: 816369673}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -448,7 +449,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816369666}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.72, z: -4.329}
+  m_LocalPosition: {x: 0, y: 1.72, z: -14.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 961563743}
@@ -469,10 +470,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   rotationSpeed: 100
-  pitch: 0
-  yaw: 0
   minPitch: -45
   maxPitch: 45
+  jumpForceMagnitude: 300
+  acceleration: {x: 0, y: 0, z: 0}
+  pitch: 0
+  yaw: 0
+  isCrouched: 0
 --- !u!143 &816369671
 CharacterController:
   m_ObjectHideFlags: 0
@@ -501,6 +505,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bf10cdea1344482e91a4f2b58506b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &816369673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816369666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8366934293e1f545845ba4cac071964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &961563742
@@ -1109,8 +1125,13 @@ MonoBehaviour:
   - {fileID: 311887232}
   - {fileID: 1472535541}
   eyes: {fileID: 272434746}
+  sightRadius: 5
+  maxSight: 15
   nextWayPoint: 0
   chaseTarget: {fileID: 0}
+  lastKnownTargetLocation: {x: 0, y: 0, z: 0}
+  wanderTarget: {x: 0, y: 0, z: 0}
+  wanderRadius: 10
 --- !u!195 &1768484656
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -19,7 +19,39 @@ public class SPlayerMovement : ComponentSystem
             Vector3 localVel = new Vector3(horz, 0, vert);
             Vector3 worldVel = Quaternion.Euler(0, transform.eulerAngles.y, 0) * localVel;
             worldVel *= playerMovement.moveSpeed;
+
+            // Prevent y acceleration from accumulation
+            if (!controller.isGrounded) {
+                playerMovement.acceleration += new Vector3(0, -9.81f, 0);
+            }
+            else {
+                playerMovement.acceleration.y = 0;
+            }
+
+            // Forces
+            if (Input.GetButtonDown("Jump"))
+            {
+                playerMovement.acceleration += new Vector3(0, playerMovement.jumpForceMagnitude, 0);
+            }
+
+            // Crouching
+            if (Input.GetButtonDown("Crouch"))
+            {
+                playerMovement.isCrouched = true;
+                controller.height /= 2;
+                playerMovement.moveSpeed /= 2;
+            }
+            else if (Input.GetButtonUp("Crouch"))
+            {
+                playerMovement.isCrouched = false;
+                controller.height *= 2;
+                playerMovement.moveSpeed *= 2;
+            }
+  
+
+            worldVel += playerMovement.acceleration * Time.deltaTime;
             controller.Move(worldVel * Time.deltaTime);
+            
 
             // Rotation
             float yaw = Input.GetAxis("Mouse X");

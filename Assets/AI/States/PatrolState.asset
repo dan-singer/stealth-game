@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf15c7741513c42438095e2b72645ed2, type: 3}
-  m_Name: ChaseState
+  m_Name: PatrolState
   m_EditorClassIdentifier: 
   actions:
-  - {fileID: 11400000, guid: c9dbf1e0e991a614db5abc3d8159e388, type: 2}
+  - {fileID: 11400000, guid: 445715077ade61c4e8eae2eef5838dcd, type: 2}
   transitions:
   - decision: {fileID: 11400000, guid: 3d7ce44900ab6d742b29daa2a0279da9, type: 2}
-    trueState: {fileID: 11400000}
-    falseState: {fileID: 11400000, guid: 3352131345305cb49b3fed54c4a30a21, type: 2}
-  sceneGizmoColor: {r: 0.9339623, g: 0.8546636, b: 0.8546636, a: 1}
+    trueState: {fileID: 11400000, guid: 9ac01e811e0990d449a1a7c418c93d08, type: 2}
+    falseState: {fileID: 11400000}
+  sceneGizmoColor: {r: 0.1495194, g: 0.990566, b: 0.21363804, a: 1}

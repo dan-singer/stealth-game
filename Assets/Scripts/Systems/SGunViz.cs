@@ -15,10 +15,6 @@ public class SGunViz : ComponentSystem
         EntityManager entityManager = World.Active.EntityManager;
         Entities.ForEach((Entity entity, Transform transform, CGun gun, CGunViz gunViz, LineRenderer lineRenderer) => {
             Vector3 launchDir = gun.transform.forward;
-            if (Vector3.Angle(Vector3.forward, launchDir) < 20.0f)
-            {
-                launchDir = Quaternion.AngleAxis(gun.pitchOffset, gun.transform.right) * launchDir;
-            }
             // s = .5at^2 + v0t + h0
             Vector3 a = new Vector3(0, -9.81f, 0);
             Vector3 v0 = launchDir * gun.launchForceMagnitude * Time.fixedDeltaTime;

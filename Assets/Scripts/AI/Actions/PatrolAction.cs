@@ -3,11 +3,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PluggableAI/Actions/Patrol")]
 public class PatrolAction : Action 
 {
-    public override void Act(StateController controller)
+    public override void Act(IStateController controller)
     {
-        Patrol(controller);
+        Patrol((StateController)controller);
     }
-
+    
     private void Patrol(StateController controller)
     {
         controller.navMeshAgent.destination = controller.wayPointList[controller.nextWayPoint].position;

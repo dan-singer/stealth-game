@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a3b13faf1e5c71469a917974af7c586, type: 3}
-  m_Name: ChaseAction
+  m_Script: {fileID: 11500000, guid: e3d315c5a3bf094459a7596132b30f41, type: 3}
+  m_Name: Patrol
   m_EditorClassIdentifier: 
