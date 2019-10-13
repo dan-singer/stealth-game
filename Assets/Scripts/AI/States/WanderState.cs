@@ -7,7 +7,7 @@ public class WanderState : State
     {
         base.Enter(controller);
         StateController castedController = (StateController)controller;
-        castedController.wanderTarget = Vector3.zero;
+        castedController.hasWanderTarget = false;
     }
 
     public override void Exit(IStateController controller)

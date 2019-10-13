@@ -1,12 +1,18 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "PluggableAI/Generic State")]
+/// <summary>
+/// Collection of Actions and Transitions
+/// </summary>
 public class State : ScriptableObject 
 {
     public Action[] actions;
     public Transition[] transitions;
     public Color sceneGizmoColor = Color.grey;
 
+    /// <summary>
+    /// Overridable in subclasses
+    /// </summary>
     public virtual void Enter(IStateController controller)
     {
 
@@ -47,6 +53,9 @@ public class State : ScriptableObject
         }
     }
 
+    /// <summary>
+    /// Overridable in subclasses
+    /// </summary>
     public virtual void Exit(IStateController controller)
     {
 

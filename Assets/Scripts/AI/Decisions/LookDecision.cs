@@ -21,9 +21,11 @@ public class LookDecision : Decision
             if (pv.IsVisible)
             {
                 controller.chaseTarget = hit.transform;
+                controller.lastTargetSightTime = Time.time;
                 return true;
             }
         }
-        return false;
+        bool stillInMemory = Time.time - controller.lastTargetSightTime < controller.targetSightMemoryDuration;
+        return stillInMemory;
     }
 }

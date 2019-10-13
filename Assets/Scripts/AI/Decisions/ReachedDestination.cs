@@ -8,6 +8,6 @@ public class ReachedDestination : Decision
     public override bool Decide(IStateController controller)
     {
         StateController castedController = (StateController)controller;
-        return castedController.navMeshAgent.remainingDistance <= castedController.navMeshAgent.stoppingDistance && !castedController.navMeshAgent.pathPending;
+        return castedController.navMeshAgent.remainingDistance <= castedController.navMeshAgent.stoppingDistance;
     }
 }

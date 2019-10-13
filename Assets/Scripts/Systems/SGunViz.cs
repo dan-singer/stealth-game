@@ -30,6 +30,7 @@ public class SGunViz : ComponentSystem
             for (int i = 0; i < positions.Length; ++i) {
                 float t = (i / (float)gunViz.resolution) * timeOfImpact;
                 positions[i] =  (.5f * a * t * t) + (v0 * t) + h0; 
+                positions[i] = gun.transform.InverseTransformPoint(positions[i]);
             }
             lineRenderer.startWidth = lineRenderer.endWidth = 0.1f;
             lineRenderer.positionCount = positions.Length;
