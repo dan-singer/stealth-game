@@ -28,7 +28,6 @@ public class SPlayerMovement : ComponentSystem
                     playerMovement.footstepTime = 0.0f;
                     playerMovement.curFootstepIndex = (playerMovement.curFootstepIndex + 1) % playerMovement.footstepSounds.Length;
                     audioSource.PlayOneShot(playerMovement.footstepSounds[playerMovement.curFootstepIndex]);
-
                 }
                 playerMovement.footstepTime += Time.deltaTime;
             } 
