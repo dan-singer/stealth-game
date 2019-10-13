@@ -7,6 +7,7 @@ using Unity.Mathematics;
 using Unity.Rendering;
 
 /// <summary>
+/// General initial force applier
 /// </summary>
 public class SInitialForce : ComponentSystem
 {

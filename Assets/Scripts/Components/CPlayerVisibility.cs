@@ -1,5 +1,9 @@
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+
+/// <summary>
+/// Adjusts various post processing settings and invokes events regarding visibility
+/// </summary>
 public class CPlayerVisibility : MonoBehaviour
 {
     public PostProcessProfile profile;
