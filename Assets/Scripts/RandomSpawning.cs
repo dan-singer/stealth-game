@@ -21,7 +21,8 @@ public class RandomSpawning : MonoBehaviour
         set4 = Random.Range(9, 12);
         set5 = Random.Range(12, 15);
         set6 = Random.Range(15, 18);
-        set7 = Random.Range(18, 21);
+        set7 = Random.Range(18, 20);
+        Debug.Log(set7);
 
         // do random.range(0-3), then random.range(3-6), random.range(6-9), random.range(9-12), random.range(12-15), random.range(15-18), random.range(18-21)
         // spawn enemies in these 6 random locations
