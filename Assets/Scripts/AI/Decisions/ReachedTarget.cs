@@ -9,7 +9,13 @@ public class ReachedTarget : Decision
     {
         StateController castedController = (StateController)controller;
 
-        return Vector3.SqrMagnitude(castedController.transform.position - castedController.target.position) 
+        bool reachedTarget = Vector3.SqrMagnitude(castedController.transform.position - castedController.target.position) 
                         <= Mathf.Pow(castedController.navMeshAgent.stoppingDistance, 2.0f);
+
+        if (reachedTarget && StateController.HitTarget != null) 
+        {
+            StateController.HitTarget();
+        }
+        return reachedTarget;
     }
 }

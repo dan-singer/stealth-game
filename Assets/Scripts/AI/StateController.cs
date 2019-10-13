@@ -39,7 +39,7 @@ public class StateController : MonoBehaviour, IStateController
     public static System.Action LostTarget;
     public static System.Action BeganSearching;
     public static System.Action FinishedSearching;
-
+    public static System.Action HitTarget;
 
 
     private void Start()

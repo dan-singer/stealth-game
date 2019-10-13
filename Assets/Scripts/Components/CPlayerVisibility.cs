@@ -7,4 +7,5 @@ public class CPlayerVisibility : MonoBehaviour
     public int numEnemiesSearchingFor = 0;
     public float targetIntensity = 0.444f;
     [HideInInspector] public bool initialized = false;
+    [HideInInspector] public bool isDead = false;
 }

@@ -28,11 +28,20 @@ public class SPlayerVisibility : ComponentSystem
                 StateController.FinishedSearching += () => {
                     --playerVisibility.numEnemiesSearchingFor;
                 };
+                StateController.HitTarget += () => {
+                    playerVisibility.isDead = true;
+                };
                 playerVisibility.initialized = true;
             }
             Color targetColor = new Color(0, 0, 0, 0);
             float targetIntensity = 0.0f;
-            if (playerVisibility.numEnemiesSeenBy > 0) {
+            Vector2 targetCenter = new Vector2(0.5f, 0.5f);
+            if (playerVisibility.isDead) {
+                targetColor = Color.red;
+                targetIntensity = 1.0f;
+                targetCenter.x = 2.0f;
+            }
+            else if (playerVisibility.numEnemiesSeenBy > 0) {
                 targetColor = Color.red;
                 targetIntensity = playerVisibility.targetIntensity;
             }
@@ -46,6 +55,7 @@ public class SPlayerVisibility : ComponentSystem
 
             vignette.color.value = lerpedColor;
             vignette.intensity.value = lerpedIntensity;
+            vignette.center.value = targetCenter;
         });
     }
 }
