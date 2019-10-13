@@ -7,6 +7,8 @@ TagManager:
   - Terrain
   - VisibilityBlocker
   - Fire
+  - cardPiece
+  - grayedSpace
   layers:
   - Default
   - TransparentFX
