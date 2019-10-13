@@ -29,7 +29,6 @@ public class SGunViz : ComponentSystem
             float targetHeight = gun.cam.transform.position.y - height;
 
             float timeOfImpact = (-v0.y - Mathf.Sqrt((v0.y * v0.y) - (2 * a.y) * (h0.y - targetHeight))) / a.y;
-            Debug.Log(timeOfImpact);
             
             Vector3[] positions = new Vector3[gunViz.resolution + 1];
             for (int i = 0; i < positions.Length; ++i) {
