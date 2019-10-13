@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "PluggableAI/State")]
+[CreateAssetMenu(menuName = "PluggableAI/Generic State")]
 public class State : ScriptableObject 
 {
     public Action[] actions;
@@ -33,10 +33,16 @@ public class State : ScriptableObject
             if (decisionSucceeded) 
             {
                 controller.TransitionToState(transitions[i].trueState);
+                if (transitions[i].trueState != this) {
+                    break;
+                }
             }
             else 
             {
                 controller.TransitionToState(transitions[i].falseState);
+                if (transitions[i].falseState != this) {
+                    break;
+                }
             }
         }
     }

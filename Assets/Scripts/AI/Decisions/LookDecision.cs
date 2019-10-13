@@ -13,6 +13,7 @@ public class LookDecision : Decision
 
     private bool Look(StateController controller)
     {
+        Debug.DrawLine(controller.eyes.position, controller.eyes.position + controller.eyes.forward * controller.maxSight);
         RaycastHit hit;
         if (Physics.SphereCast(controller.eyes.position, controller.sightRadius, controller.eyes.forward, out hit, controller.maxSight) && hit.collider.CompareTag("Player"))
         {

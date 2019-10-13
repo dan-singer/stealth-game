@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 180c74f6f5b9ff144b2cb494bf70db24, type: 3}
-  m_Name: ActiveStateDecision
+  m_Script: {fileID: 11500000, guid: aadd649faae20174baefc7d238f6503d, type: 3}
+  m_Name: TimeDecisionLong
   m_EditorClassIdentifier: 
+  duration: 10

@@ -15,12 +15,13 @@ public class StateController : MonoBehaviour, IStateController
     [HideInInspector] public Vector3 lastKnownTargetLocation;
 
     [HideInInspector] public Vector3 wanderTarget;
+    [HideInInspector] public float stateEnterTime;
     public float wanderRadius = 10.0f;
-
 
     private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        stateEnterTime = Time.time;
     }
 
     private void Update()
@@ -41,8 +42,13 @@ public class StateController : MonoBehaviour, IStateController
     }
     public void TransitionToState(State nextState)
     {
-        currentState.Exit(this);
-        currentState = nextState;
-        currentState.Enter(this);
+        if (nextState != null && nextState != currentState)
+        {
+            currentState.Exit(this);
+            currentState = nextState;
+            currentState.Enter(this);
+            stateEnterTime = Time.time;
+        }
+
     }
 }
