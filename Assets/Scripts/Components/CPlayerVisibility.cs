@@ -12,6 +12,7 @@ public class CPlayerVisibility : MonoBehaviour
     public float targetIntensity = 0.444f;
     public Transform[] spawnTransforms;
     public float deathDuration = 2.0f;
+    public int lives = 3;
     [HideInInspector] public float deathTimer = 0;
     [HideInInspector] public bool initialized = false;
     [HideInInspector] public bool isDead = false;
