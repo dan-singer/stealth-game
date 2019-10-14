@@ -25,6 +25,7 @@ public class StateController : MonoBehaviour, IStateController
     /// </summary>
     public float targetSightMemoryDuration = .75f;
 
+    public LayerMask detectionMask;
 
     public int nextWayPoint { get; set; }
     public Transform chaseTarget { get; set; }

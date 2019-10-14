@@ -15,7 +15,7 @@ public class LookDecision : Decision
     {
         Debug.DrawLine(controller.eyes.position, controller.eyes.position + controller.eyes.forward * controller.maxSight);
         RaycastHit hit;
-        if (Physics.SphereCast(controller.eyes.position, controller.sightRadius, controller.eyes.forward, out hit, controller.maxSight) && hit.collider.CompareTag("Player"))
+        if (Physics.SphereCast(controller.eyes.position, controller.sightRadius, controller.eyes.forward, out hit, controller.maxSight, controller.detectionMask) && hit.collider.CompareTag("Player"))
         {
             PlayerVisibility pv = hit.transform.GetComponent<PlayerVisibility>();
             if (pv.IsVisible)

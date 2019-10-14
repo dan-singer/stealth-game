@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 240832283267221047}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.55, z: 0.527}
+  m_LocalPosition: {x: 0, y: 0.55, z: 2.012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 240832285300174624}
@@ -181,7 +181,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 10
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -212,11 +212,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   eyes: {fileID: 240832283267221044}
-  sightRadius: 3
+  sightRadius: 5
   maxSight: 15
   wanderRadius: 15
   target: {fileID: 0}
   targetSightMemoryDuration: 3.5
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 823
 --- !u!1001 &240832283306219881
 PrefabInstance:
   m_ObjectHideFlags: 0

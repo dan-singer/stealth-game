@@ -43,6 +43,17 @@ public class SPlayerMovement : ComponentSystem
                 playerMovement.bobTime = Mathf.Lerp(playerMovement.bobTime, resumeTarget, 0.1f);
                 playerMovement.footstepTime = 0.0f;
             }
+
+            // Sprinting
+            if (Input.GetButtonDown("Sprint"))
+            {
+                playerMovement.moveSpeed *= 2;
+            }
+            else if (Input.GetButtonUp("Sprint"))
+            {
+                playerMovement.moveSpeed /= 2;
+            }
+
             Vector3 worldVel = Quaternion.Euler(0, transform.eulerAngles.y, 0) * localVel;
             worldVel *= playerMovement.moveSpeed;
 
@@ -59,6 +70,8 @@ public class SPlayerMovement : ComponentSystem
             {
                 playerMovement.acceleration += new Vector3(0, playerMovement.jumpForceMagnitude, 0);
             }
+
+
 
             // Crouching
             if (Input.GetButtonDown("Crouch"))
