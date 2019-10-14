@@ -20,40 +20,36 @@ public class SPlayerVisibility : ComponentSystem
     {
         Entities.ForEach((Entity entity, Transform transform, CPlayerVisibility playerVisibility) => {
             if (!playerVisibility.initialized) {
-                StateController.SawTarget += () => {
+                StateController.SawTarget = () => {
                     ++playerVisibility.numEnemiesSeenBy;
                     if (playerVisibility.Seen != null) {
                         playerVisibility.Seen();
                     }
                 };
-                StateController.LostTarget += () => {
+                StateController.LostTarget = () => {
                     --playerVisibility.numEnemiesSeenBy;
                 };
-                StateController.BeganSearching += () => {
+                StateController.BeganSearching = () => {
                     ++playerVisibility.numEnemiesSearchingFor;
                     if (playerVisibility.numEnemiesSeenBy == 0 && playerVisibility.SearchedFor != null)
                         playerVisibility.SearchedFor();
                 };
-                StateController.FinishedSearching += () => {
+                StateController.FinishedSearching = () => {
                     --playerVisibility.numEnemiesSearchingFor;
                     if (playerVisibility.numEnemiesSearchingFor == 0 && playerVisibility.numEnemiesSeenBy == 0 && playerVisibility.Hidden != null) {
                         playerVisibility.Hidden();
                     }
                 };
-                StateController.HitTarget += () => {
+                StateController.HitTarget = () => {
                     playerVisibility.isDead = true;
                     // Find the nearest spawn location
                     nearestSpawnLocation = playerVisibility.spawnTransforms[0].position;
                     for (int i = 1; i < playerVisibility.spawnTransforms.Length; ++i) {
                         if (Vector3.SqrMagnitude(playerVisibility.spawnTransforms[i].position - transform.position) < Vector3.SqrMagnitude(nearestSpawnLocation - transform.position)) {
-                            Debug.Log("Checking " + i);
                             nearestSpawnLocation = playerVisibility.spawnTransforms[i].position;
                         }
                     }
                     --playerVisibility.lives;
-                    if (playerVisibility.lives <= 0) {
-                        
-                    }
                     playerVisibility.deathTimer = 0.0f;
                     if (playerVisibility.Hidden != null) {
                         playerVisibility.Hidden();

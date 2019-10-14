@@ -55,7 +55,7 @@ public class CardPiecesManager : MonoBehaviour
             promptText.SetActive(true);
             promptText.transform.GetChild(0).GetComponent<Text>().text = "Collect card piece (E)";
         }
-        if (other.gameObject.tag == "altar" && pieces.Count == 0)
+        if (other.gameObject.tag == "Altar" && pieces.Count == 0)
         {
             promptText.SetActive(true);
             promptText.transform.GetChild(0).GetComponent<Text>().text = "Submit Empress Card (E)";
@@ -76,7 +76,7 @@ public class CardPiecesManager : MonoBehaviour
                 gameObject.GetComponentInChildren<Guidance>().piecesList = pieces;
                 UpdateCollected();
             }
-            if (other.gameObject.tag == "altar" && pieces.Count == 0) 
+            if (other.gameObject.tag == "Altar" && pieces.Count == 0) 
             {
                 SceneManager.LoadScene("EndScene");
             }
@@ -85,7 +85,7 @@ public class CardPiecesManager : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "cardPiece" || other.gameObject.tag == "altar")
+        if (other.gameObject.tag == "cardPiece" || other.gameObject.tag == "Altar")
         {
             promptText.SetActive(false);
         }
