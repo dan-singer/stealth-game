@@ -10,7 +10,7 @@ TagManager:
   - cardPiece
   - grayedSpace
   - SpawnLocation
-  - Altar
+  - altar
   layers:
   - Default
   - TransparentFX
