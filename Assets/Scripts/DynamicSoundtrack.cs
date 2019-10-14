@@ -7,20 +7,20 @@ public class DynamicSoundtrack : MonoBehaviour
     private void Start()
     {
         playerViz = GameObject.FindWithTag("Player").GetComponent<CPlayerVisibility>();
-        playerViz.Seen += () => {
+        playerViz.Seen = () => {
             SwitchClipsAndMaintainTime(chase);
         };
-        playerViz.SearchedFor += () => {
+        playerViz.SearchedFor = () => {
             SwitchClipsAndMaintainTime(search);
         };
-        playerViz.Hidden += () => {
+        playerViz.Hidden = () => {
             SwitchClipsAndMaintainTime(ambient);
         };
     }
 
     private void SwitchClipsAndMaintainTime(AudioMixerSnapshot snapshot) 
     {
-        snapshot.TransitionTo(0.5f);
+        snapshot.TransitionTo(0.0f);
     }
 
     private void Update()
