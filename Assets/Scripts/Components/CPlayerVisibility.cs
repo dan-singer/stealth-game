@@ -10,6 +10,9 @@ public class CPlayerVisibility : MonoBehaviour
     public int numEnemiesSeenBy = 0;   
     public int numEnemiesSearchingFor = 0;
     public float targetIntensity = 0.444f;
+    public Transform[] spawnTransforms;
+    public float deathDuration = 2.0f;
+    [HideInInspector] public float deathTimer = 0;
     [HideInInspector] public bool initialized = false;
     [HideInInspector] public bool isDead = false;
 

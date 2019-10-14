@@ -9,6 +9,7 @@ TagManager:
   - Fire
   - cardPiece
   - grayedSpace
+  - SpawnLocation
   layers:
   - Default
   - TransparentFX

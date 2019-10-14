@@ -136,7 +136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: {x: 0, y: 0, z: 0}
-  isLocal: 0
   launched: 0
 --- !u!114 &-5167076926462998483
 MonoBehaviour:
@@ -150,4 +149,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 785d7aca986b3694ba4d2517f38d2d58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toSpawn: {fileID: 6145575881153354428, guid: 899b6c767d2838747b455c7ef96271f3, type: 3}
+  toSpawn: {fileID: 7569814439012172763, guid: 34fbe2379f77b0e47a18600f978ab096, type: 3}
+  spawnOffset: {x: 0, y: -1.8, z: 0}

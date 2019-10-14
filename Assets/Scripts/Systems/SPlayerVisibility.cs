@@ -12,13 +12,16 @@ using UnityEngine.Rendering.PostProcessing;
 /// </summary>
 public class SPlayerVisibility : ComponentSystem
 {
+
+    Vector3 nearestSpawnLocation = Vector3.zero;
+
     protected override void OnUpdate()
     {
         Entities.ForEach((Entity entity, Transform transform, CPlayerVisibility playerVisibility) => {
             if (!playerVisibility.initialized) {
                 StateController.SawTarget += () => {
                     ++playerVisibility.numEnemiesSeenBy;
-                    if (playerVisibility.numEnemiesSeenBy == 1 && playerVisibility.Seen != null) {
+                    if (playerVisibility.Seen != null) {
                         playerVisibility.Seen();
                     }
                 };
@@ -27,21 +30,42 @@ public class SPlayerVisibility : ComponentSystem
                 };
                 StateController.BeganSearching += () => {
                     ++playerVisibility.numEnemiesSearchingFor;
-                    if (playerVisibility.numEnemiesSeenBy == 0 && playerVisibility.numEnemiesSearchingFor == 1 && playerVisibility.SearchedFor != null) {
+                    if (playerVisibility.numEnemiesSeenBy == 0 && playerVisibility.SearchedFor != null)
                         playerVisibility.SearchedFor();
-                    }
                 };
                 StateController.FinishedSearching += () => {
                     --playerVisibility.numEnemiesSearchingFor;
-                    if (playerVisibility.numEnemiesSeenBy == 0 && playerVisibility.numEnemiesSearchingFor == 0 && playerVisibility.Hidden != null) {
+                    if (playerVisibility.numEnemiesSearchingFor == 0 && playerVisibility.numEnemiesSeenBy == 0 && playerVisibility.Hidden != null) {
                         playerVisibility.Hidden();
                     }
                 };
                 StateController.HitTarget += () => {
                     playerVisibility.isDead = true;
+                    // Find the nearest spawn location
+                    nearestSpawnLocation = playerVisibility.spawnTransforms[0].position;
+                    for (int i = 1; i < playerVisibility.spawnTransforms.Length; ++i) {
+                        if (Vector3.SqrMagnitude(playerVisibility.spawnTransforms[i].position - transform.position) < Vector3.SqrMagnitude(nearestSpawnLocation - transform.position)) {
+                            Debug.Log("Checking " + i);
+                            nearestSpawnLocation = playerVisibility.spawnTransforms[i].position;
+                        }
+                    }
+                    playerVisibility.deathTimer = 0.0f;
+                    if (playerVisibility.Hidden != null) {
+                        playerVisibility.Hidden();
+                    }
                 };
                 playerVisibility.initialized = true;
             }
+            if (playerVisibility.isDead) {
+                if (Mathf.Approximately(playerVisibility.deathTimer, 0.0f)) {
+                    transform.position = nearestSpawnLocation + new Vector3(0, 2.0f, 0);
+                }
+                playerVisibility.deathTimer += Time.deltaTime;
+                if (playerVisibility.deathTimer > playerVisibility.deathDuration) {
+                    playerVisibility.isDead = false;
+                }
+            }
+
             Color targetColor = new Color(0, 0, 0, 0);
             float targetIntensity = 0.0f;
             Vector2 targetCenter = new Vector2(0.5f, 0.5f);
