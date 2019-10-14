@@ -20,6 +20,8 @@ public class PlayerVisibility : MonoBehaviour
     private void Start() 
     {
         playerMovement = GetComponent<CPlayerMovement>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void OnTriggerEnter(Collider other)

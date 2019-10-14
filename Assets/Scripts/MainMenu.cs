@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class MainMenu : MonoBehaviour
         };
 
         cameraTransition.TransitionsComplete += () => {
-            print("Would load main level now");
+            SceneManager.LoadScene("Main", LoadSceneMode.Single);
         };
     }
 
