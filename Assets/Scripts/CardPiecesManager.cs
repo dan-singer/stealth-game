@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class CardPiecesManager : MonoBehaviour
 {
     // [SerializeField]
@@ -53,6 +53,12 @@ public class CardPiecesManager : MonoBehaviour
         if (other.gameObject.tag == "cardPiece")
         {
             promptText.SetActive(true);
+            promptText.transform.GetChild(0).GetComponent<Text>().text = "Collect card piece (E)";
+        }
+        if (other.gameObject.tag == "altar" && pieces.Count == 0)
+        {
+            promptText.SetActive(true);
+            promptText.transform.GetChild(0).GetComponent<Text>().text = "Submit Empress Card (E)";
         }
     }
 
@@ -70,12 +76,19 @@ public class CardPiecesManager : MonoBehaviour
                 gameObject.GetComponentInChildren<Guidance>().piecesList = pieces;
                 UpdateCollected();
             }
+            if (other.gameObject.tag == "altar" && pieces.Count == 0) 
+            {
+                SceneManager.LoadScene("EndScene");
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        promptText.SetActive(false);
+        if (other.gameObject.tag == "cardPiece" || other.gameObject.tag == "altar")
+        {
+            promptText.SetActive(false);
+        }
     }
 
 

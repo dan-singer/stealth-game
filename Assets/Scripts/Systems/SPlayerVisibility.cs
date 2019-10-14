@@ -6,6 +6,7 @@ using UnityEngine;
 using Unity.Mathematics;
 using Unity.Rendering;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// System that modifies a post process profile to indicate player's visibility state
@@ -49,6 +50,10 @@ public class SPlayerVisibility : ComponentSystem
                             nearestSpawnLocation = playerVisibility.spawnTransforms[i].position;
                         }
                     }
+                    --playerVisibility.lives;
+                    if (playerVisibility.lives <= 0) {
+                        
+                    }
                     playerVisibility.deathTimer = 0.0f;
                     if (playerVisibility.Hidden != null) {
                         playerVisibility.Hidden();
@@ -57,13 +62,19 @@ public class SPlayerVisibility : ComponentSystem
                 playerVisibility.initialized = true;
             }
             if (playerVisibility.isDead) {
-                if (Mathf.Approximately(playerVisibility.deathTimer, 0.0f)) {
-                    transform.position = nearestSpawnLocation + new Vector3(0, 2.0f, 0);
+                if (playerVisibility.lives <= 0) {
+                    SceneManager.LoadScene("DeathScene");
                 }
-                playerVisibility.deathTimer += Time.deltaTime;
-                if (playerVisibility.deathTimer > playerVisibility.deathDuration) {
-                    playerVisibility.isDead = false;
+                else {
+                    if (Mathf.Approximately(playerVisibility.deathTimer, 0.0f)) {
+                        transform.position = nearestSpawnLocation + new Vector3(0, 2.0f, 0);
+                    }
+                    playerVisibility.deathTimer += Time.deltaTime;
+                    if (playerVisibility.deathTimer > playerVisibility.deathDuration) {
+                        playerVisibility.isDead = false;
+                    }
                 }
+
             }
 
             Color targetColor = new Color(0, 0, 0, 0);
