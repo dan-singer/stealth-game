@@ -3,32 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+/// <summary>
+/// Manages Card pieces UI and informs Guidance System about said card pieces
+/// </summary>
 public class CardPiecesManager : MonoBehaviour
 {
-    // [SerializeField]
-    public List<GameObject> pieces;
+    [SerializeField] private List<GameObject> pieces;
 
-    [SerializeField]
-    private GameObject player;
+    [SerializeField] private GameObject player;
 
-    [SerializeField]
-    public GameObject promptText;
+    [SerializeField] private GameObject promptText;
 
-    [SerializeField]
-    private Canvas uiCanvas;
+    [SerializeField] private Canvas uiCanvas;
 
-    [SerializeField]
-    public List<Image> grayedSpaces;
+    [SerializeField] private List<Image> grayedSpaces;
 
-    private int collectedCount = 0;
-    private GameObject[] tempGameObjectArr;
-
-    private int cardsToCollect;
+    private int totalCards;
+    private int remainingCards;
+    private Text promptMessage;
 
     // Start is called before the first frame update
     void Start()
     {
-        tempGameObjectArr = GameObject.FindGameObjectsWithTag("cardPiece");
+        GameObject[] tempGameObjectArr = GameObject.FindGameObjectsWithTag("cardPiece");
         // get the array of card pieces
         for(int i = 0; i < tempGameObjectArr.Length; i++)
         {
@@ -38,8 +35,10 @@ public class CardPiecesManager : MonoBehaviour
 
         gameObject.GetComponentInChildren<Guidance>().piecesList = pieces;
 
-        cardsToCollect = pieces.Count;
+        totalCards = pieces.Count;
+        remainingCards = pieces.Count;
 
+        promptMessage = promptText.transform.GetChild(0).GetComponent<Text>();
         promptText.SetActive(false);
     }
 
@@ -50,31 +49,30 @@ public class CardPiecesManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "cardPiece")
+        if (other.gameObject.CompareTag("cardPiece"))
         {
             promptText.SetActive(true);
-            promptText.transform.GetChild(0).GetComponent<Text>().text = "Collect card piece (E)";
+            promptMessage.text = "Collect card piece (E)";
         }
-        if (other.gameObject.tag == "Altar" && pieces.Count == 0)
+        if (other.gameObject.CompareTag("Altar") && pieces.Count == 0)
         {
             promptText.SetActive(true);
-            promptText.transform.GetChild(0).GetComponent<Text>().text = "Submit Empress Card (E)";
+            promptMessage.text = "Submit Empress Card (E)";
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        // promptText.SetActive(true);
-
         if (Input.GetKeyDown(KeyCode.E))
         {
             if(other.gameObject.tag == "cardPiece")
             {
                 pieces.Remove(other.gameObject);
                 Destroy(other.gameObject);
-                cardsToCollect = pieces.Count;
+                remainingCards = pieces.Count;
                 gameObject.GetComponentInChildren<Guidance>().piecesList = pieces;
-                UpdateCollected();
+                UpdateGrayedSpaces();
+                promptText.SetActive(false);
             }
             if (other.gameObject.tag == "Altar" && pieces.Count == 0) 
             {
@@ -85,16 +83,14 @@ public class CardPiecesManager : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "cardPiece" || other.gameObject.tag == "Altar")
+        if (other.gameObject.CompareTag("cardPiece") || other.gameObject.CompareTag("Altar"))
         {
             promptText.SetActive(false);
         }
     }
 
-
-    void UpdateCollected()
+    void UpdateGrayedSpaces()
     {
-        promptText.SetActive(false);
-        grayedSpaces[5 - cardsToCollect].enabled = false;
+        grayedSpaces[totalCards - remainingCards - 1].enabled = false;
     }
 }

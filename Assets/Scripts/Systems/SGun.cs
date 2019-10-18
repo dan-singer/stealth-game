@@ -13,19 +13,17 @@ public class SGun : ComponentSystem
 {
     protected override void OnUpdate()
     {
-        EntityManager entityManager = World.Active.EntityManager;
-
         Entities.ForEach((Entity entity, Transform transform, CGun gun, AudioSource audioSource) => {
             if (!gun.initialized) {
-                gun.curAmmo = gun.startAmmo;
+                gun.CurAmmo = gun.startAmmo;
                 gun.initialized = true;
             }
-            if (Input.GetButtonDown("Fire1") && gun.curAmmo > 0) {
+            if (Input.GetButtonDown("Fire1")) {
                 Vector3 launchDir = gun.transform.forward;
                 GameObject bullet = GameObject.Instantiate(gun.bullet, gun.socket.position, Quaternion.identity);
                 bullet.GetComponent<CInitialForce>().force = launchDir * gun.launchForceMagnitude;
                 audioSource.PlayOneShot(gun.fireSound);
-                --gun.curAmmo;
+                --gun.CurAmmo;
             }
         });
     }

@@ -15,6 +15,20 @@ public class CGun : MonoBehaviour
     public float pitchOffset = -75.0f;
 
     public int startAmmo = 4;
-    [HideInInspector] public int curAmmo;
+
+    private int curAmmo;
+    public int CurAmmo
+    {
+        get
+        {
+            return curAmmo;
+        }
+        set
+        {
+            if (value < 0)              curAmmo = 0;
+            else if (value > startAmmo) curAmmo = startAmmo;
+            else                        curAmmo = value;
+        }
+    }
     [HideInInspector] public bool initialized = false;
 }

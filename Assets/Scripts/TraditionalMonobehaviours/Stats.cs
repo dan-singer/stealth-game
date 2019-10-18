@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class LivesHUD : MonoBehaviour
+public class Stats : MonoBehaviour
 {
 
     public CPlayerVisibility playerVisibility;
-    private Text text;
+    public CGun playerGun;
+    [SerializeField] private Text livesText;
+    [SerializeField] private Text ammoText;
+
     // Start is called before the first frame update
     void Start()
     {
-        text = GetComponent<Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        text.text = $"Lives: {playerVisibility.lives}";
+        livesText.text = $"Lives: {playerVisibility.lives}";
+        ammoText.text = $"Ammo: {playerGun.CurAmmo} / {playerGun.startAmmo}";
     }
 }

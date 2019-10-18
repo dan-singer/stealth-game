@@ -13,8 +13,6 @@ public class SDayNight : ComponentSystem
 {
     protected override void OnUpdate()
     {
-        EntityManager entityManager = World.Active.EntityManager;
-
         Entities.ForEach((Entity entity, Light light, CDayNight dayNight) => {
             light.transform.rotation = Quaternion.Euler((dayNight.timeOfDay * 360.0f) - 90.0f, 170.0f, 0.0f);
 

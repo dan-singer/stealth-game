@@ -6,7 +6,7 @@ using UnityEngine;
 using Unity.Mathematics;
 
 /// <summary>
-/// Player Movement System. Handles Translation and Rotation for the First Person character
+/// Player Movement System.
 /// </summary>
 public class SPlayerMovement : ComponentSystem
 {
@@ -73,7 +73,8 @@ public class SPlayerMovement : ComponentSystem
 
 
 
-            // Crouching
+            // Uncomment for crouching ability
+            /*
             if (Input.GetButtonDown("Crouch"))
             {
                 playerMovement.isCrouched = true;
@@ -85,13 +86,11 @@ public class SPlayerMovement : ComponentSystem
                 playerMovement.isCrouched = false;
                 controller.height *= 2;
                 playerMovement.moveSpeed *= 2;
-            }
+            }*/
   
 
             worldVel += playerMovement.acceleration * Time.deltaTime;
             controller.Move(worldVel * Time.deltaTime);
-
-            
 
             // Rotation
             float yaw = Input.GetAxis("Mouse X");

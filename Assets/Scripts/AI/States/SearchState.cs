@@ -20,6 +20,5 @@ public class SearchState : State
     public override void Exit(IStateController controller)
     {
         base.Exit(controller);
-        StateController castedController = (StateController)controller;
     }
 }

@@ -1,5 +1,9 @@
 using UnityEngine;
 using UnityEngine.Audio;
+
+/// <summary>
+/// Manages the dynamic soundtrack through the use of Audio Mixer Snapshots
+/// </summary>
 public class DynamicSoundtrack : MonoBehaviour
 {
     public AudioMixerSnapshot ambient, search, chase;

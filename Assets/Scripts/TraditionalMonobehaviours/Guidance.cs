@@ -8,23 +8,19 @@ public class Guidance : MonoBehaviour
     // [SerializeField]
     public List<GameObject> piecesList;
 
-    [SerializeField]
-    private GameObject compass;
+    [SerializeField] private GameObject compass;
 
     private GameObject altar;
     private GameObject tempObject;
 
-    [SerializeField]
-    private GameObject arrow;
+    [SerializeField] private GameObject arrow;
 
-    [SerializeField]
-    private GameObject focusedPos;
+    [SerializeField] private GameObject focusedPos;
 
-    [SerializeField]
-    private GameObject unfocusedPos;
+    [SerializeField] private GameObject unfocusedPos;
 
     private bool startCheck = false;
-    private float startTime;
+    private float compassTransitionStartTime = 0;
     private float speed = 1.0f;
     private float journeyLength;
 
@@ -34,6 +30,14 @@ public class Guidance : MonoBehaviour
         altar = GameObject.Find("Altar");
     }
 
+    void TransitionCompass(Vector3 localStart, Vector3 localEnd, float startTime)
+    {
+        journeyLength = Vector3.Distance(localStart, localEnd);
+        float distCovered = (Time.time - startTime) * speed;
+        float fractionOfJourney = distCovered / journeyLength;
+        compass.transform.localPosition = Vector3.Lerp(localStart, localEnd, fractionOfJourney);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -41,40 +45,21 @@ public class Guidance : MonoBehaviour
 
         // rotate to point in the direction of the closest objective
         arrow.transform.rotation = Quaternion.LookRotation((closest - arrow.transform.position).normalized, Vector3.up);
-        
+
+
+        if (Input.GetButtonDown("Focus") || Input.GetButtonUp("Focus"))
+        {
+            compassTransitionStartTime = Time.time;
+        }
+
         // lerp to a more focused position
-        if (Input.GetKey(KeyCode.Q)) {
-            // get the start time for lerping
-            if (startCheck == false)
-            {
-                startTime = Time.time;
-                startCheck = true;
-            }
-
-            journeyLength = Vector3.Distance(unfocusedPos.transform.localPosition, focusedPos.transform.localPosition);
-
-            float distCovered = (Time.time - startTime) * speed;
-
-            float fractionOfJourney = distCovered / journeyLength;
-
-            compass.transform.localPosition = Vector3.Lerp(unfocusedPos.transform.localPosition, focusedPos.transform.localPosition, fractionOfJourney);
+        if (Input.GetButton("Focus"))
+        {
+            TransitionCompass(unfocusedPos.transform.localPosition, focusedPos.transform.localPosition, compassTransitionStartTime);    
         }
         else
-        {
-            // get the start time for lerping back
-            if(startCheck == true)
-            {
-                startTime = Time.time;
-                startCheck = false;
-            }
-
-            journeyLength = Vector3.Distance(focusedPos.transform.localPosition, unfocusedPos.transform.localPosition);
-
-            float distCovered = (Time.time - startTime) * speed;
-
-            float fractionOfJourney = distCovered / journeyLength;
-
-            compass.transform.localPosition = Vector3.Lerp(focusedPos.transform.localPosition, unfocusedPos.transform.localPosition, fractionOfJourney);
+        { 
+            TransitionCompass(focusedPos.transform.localPosition, unfocusedPos.transform.localPosition, compassTransitionStartTime);
         }
     }
 

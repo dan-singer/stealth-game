@@ -1,12 +1,15 @@
 using UnityEngine;
 
+/// <summary>
+/// General Ammo pickup component
+/// </summary>
 public class Ammo : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            other.transform.GetChild(0).GetComponent<CGun>().curAmmo++;
+            other.GetComponentInChildren<CGun>().CurAmmo++;
             Destroy(this.gameObject);
         }
     }

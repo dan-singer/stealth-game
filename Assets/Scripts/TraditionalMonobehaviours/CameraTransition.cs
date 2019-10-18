@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// General camera transition component used in the main menu
+/// </summary>
 public class CameraTransition : MonoBehaviour
 {
     public Transform[] waypoints;
@@ -15,13 +18,11 @@ public class CameraTransition : MonoBehaviour
         if (index < waypoints.Length - 1)
         {
             ++index;
-            if (Transitioned != null) Transitioned(index);
+            Transitioned?.Invoke(index);
         }
         else 
         {
-            if (TransitionsComplete != null) {
-                TransitionsComplete();
-            }
+            TransitionsComplete?.Invoke();
         }
     }
 

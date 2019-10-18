@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Helper MonoBehaviour to assist with Player Visibility settings not suited for ECS
+/// </summary>
 public class PlayerVisibility : MonoBehaviour
 {
     /// <summary>
@@ -10,7 +13,7 @@ public class PlayerVisibility : MonoBehaviour
     {
         get
         {
-            return numVisBlockersInContactWith == 0 || !playerMovement.isCrouched;
+            return numVisBlockersInContactWith == 0;
         }
     }
     private int numVisBlockersInContactWith = 0;
