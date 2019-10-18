@@ -22,9 +22,9 @@ This game was created for the RIT Wild Magic Game Jam.
 ## Programming Features
 - Made with Unity
 - Hybrid ECS Architecture + traditional EC architecture where necessary
-- Extendable AI System powered by Behavior Trees
+- Extendable AI System powered by Behaviour Trees
 
 ## Credits
-Dan Singer - Gameplay/AI Programmer
-Nick Marano - Level Designer/Gameplay Programmer
+- Dan Singer - Gameplay/AI Programmer
+- Nick Marano - Level Designer/Gameplay Programmer
 
