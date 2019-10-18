@@ -12,9 +12,8 @@ Your goal is to eradicate pollution in a forest. The Empress is the only one who
 - WASD for movement
 - LMB to fire your nature gun
 - RMB to preview your nature gun shot
-- ?? to zoom in on your compass
+- Q to zoom in on your compass
 - E to interact with cards and objects
-- Left Ctrl to crouch
 
 ## Purpose
 This game was created for the RIT Wild Magic Game Jam.
@@ -24,7 +23,7 @@ This game was created for the RIT Wild Magic Game Jam.
 - Hybrid ECS Architecture + traditional EC architecture where necessary
 - Extendable AI System powered by Behaviour Trees
 
-## Credits
+## Developers
 - Dan Singer - Gameplay/AI Programmer
 - Nick Marano - Level Designer/Gameplay Programmer
 

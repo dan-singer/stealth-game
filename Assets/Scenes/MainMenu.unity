@@ -429,7 +429,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1987, y: 183.4}
+  m_SizeDelta: {x: 1293, y: 183.4}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &608938363
 MonoBehaviour:
@@ -464,7 +464,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: .Collect all of the Empress Cards to save Nature from pollution.
+  m_Text: .Collect all of the Empress Card Fragments to save Nature from pollution.
 --- !u!222 &608938364
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -575,7 +575,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1987, y: 183.4}
+  m_SizeDelta: {x: 1293, y: 249.8}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &715733439
 MonoBehaviour:
@@ -612,7 +612,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '.Stay hidden from the pollution entities.
 
-    .RMB + LMB to create bushes to crouch (LCTRL) and hide in.'
+    .RMB + LMB to create bushes to hide in.'
 --- !u!222 &715733440
 CanvasRenderer:
   m_ObjectHideFlags: 0
