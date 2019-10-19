@@ -1,4 +1,5 @@
 # Trealthy
+![trealthy](promo.png)
 Trealthy is a first-person stealth adventure game set in a dark, haunted forest inspired by *The Empress Card* from *Tarot*.
 Your goal is to eradicate pollution in a forest. The Empress is the only one who can save the forest, but you have to collect and combine the 6 fragmented pieces of the card to summon her. You must sneak your way through the forest, avoid the pollution gas, and collect the fragmented *Empress* cards. You're also equipped with a nature gun, capable of spawning bushes that can be used as cover from the pollution if crouched in.
 
@@ -22,6 +23,7 @@ This game was created for the RIT Wild Magic Game Jam.
 - Made with Unity
 - Hybrid ECS Architecture + traditional EC architecture where necessary
 - Extendable AI System powered by Behaviour Trees
+- Original, dynamic soundtrack that changes based on how you play
 
 ## Developers
 - Dan Singer - Gameplay/AI Programmer
