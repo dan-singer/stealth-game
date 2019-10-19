@@ -66,7 +66,7 @@ public class SPlayerMovement : ComponentSystem
             }
 
             // Forces
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") && controller.isGrounded)
             {
                 playerMovement.acceleration += new Vector3(0, playerMovement.jumpForceMagnitude, 0);
             }

@@ -54,7 +54,7 @@ public class CardPiecesManager : MonoBehaviour
             promptText.SetActive(true);
             promptMessage.text = "Collect card piece (E)";
         }
-        if (other.gameObject.CompareTag("Altar") && pieces.Count == 0)
+        if (other.gameObject.CompareTag("Altar") /*&& pieces.Count == 0*/)
         {
             promptText.SetActive(true);
             promptMessage.text = "Submit Empress Card (E)";
